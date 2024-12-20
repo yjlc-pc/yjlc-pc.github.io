@@ -6,7 +6,7 @@ theme: jekyll-theme-chirpy
 # The language of the webpage › http://www.lingoes.net/en/translator/langcode.htm
 # If it has the same name as one of the files in folder `_data/locales`, the layout language will also be changed,
 # otherwise, the layout language will use the default value of 'en'.
-lang: en
+lang: cn
 
 # Change to your timezone › https://kevinnovak.github.io/Time-Zone-Picker
 timezone: Asia/Shanghai
@@ -14,9 +14,9 @@ timezone: Asia/Shanghai
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Chirpy # the main title
+title: 尹蒋乐骋的博客 # the main title
 
-tagline: A text-focused Jekyll theme # it will display as the subtitle
+tagline: 有趣的科技 # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
   A minimal, responsive and feature-rich Jekyll theme for technical writing.
@@ -173,14 +173,14 @@ collections:
 
 defaults:
   - scope:
-      path: "" # An empty string here means all files in the project
+      path: "_posts/" 
       type: posts
     values:
       layout: post
       comments: true # Enable comments in posts.
       toc: true # Display TOC column in posts.
-      # DO NOT modify the following parameter unless you are confident enough
-      # to update the code of all other post links in this project.
+      # 除非您有足够的信心，否则切勿修改以下参数
+# 更新本项目中所有其他帖子链接的代码。
       permalink: /posts/:title/
   - scope:
       path: _drafts
