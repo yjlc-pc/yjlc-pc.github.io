@@ -23,7 +23,7 @@ description: >- # used by seo meta and the atom feed
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
-url: ""
+url: "https://yjlc-pc.github.io"
 
 github:
   username: yjlc-pc # change to your GitHub username
@@ -88,7 +88,7 @@ pageviews:
 #     light — Use the light color scheme
 #     dark — Use the dark color scheme
 #
-theme_mode: dark # [light | dark]
+theme_mode: # [light | dark]
 
 # The CDN endpoint for media resources.
 # Notice that once it is assigned, the CDN url
@@ -179,8 +179,6 @@ defaults:
       layout: post
       comments: true # Enable comments in posts.
       toc: true # Display TOC column in posts.
-      # 除非您有足够的信心，否则切勿修改以下参数
-# 更新本项目中所有其他帖子链接的代码。
       permalink: /posts/:title/
   - scope:
       path: _drafts
