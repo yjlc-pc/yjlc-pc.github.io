@@ -2,7 +2,7 @@
 title: 计算器
 layout: post
 date: 2025-01-01 +0800
-permalink: /mana/
+permalink: /calc/
 toc: false
 ---
 <style>
