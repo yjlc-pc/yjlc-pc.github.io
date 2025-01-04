@@ -1,10 +1,8 @@
 ---
-icon: fas fa-tags
-order: 4
+title: Tools
+icon: 🛠️
+order: 3
 ---
-
-# 小工具
-
-## 数学
-
-[计算器](https://yjlc-pc.github.io/calc)
+<div id="calculator-app"></div>
+<script src="/assets/js/calculator.js"></script>
+<link rel="stylesheet" href="/assets/css/calculator.css">

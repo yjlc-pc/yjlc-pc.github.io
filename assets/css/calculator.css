@@ -1,0 +1,78 @@
+.calculator {
+  max-width: 300px;
+  margin: 2rem auto;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background-color: var(--card-bg);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-display {
+  width: 100%;
+  height: 2.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  text-align: right;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+}
+
+.calculator-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.btn {
+  padding: 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: var(--btn-hover-bg);
+}
+
+.operator {
+  background-color: var(--btn-operator);
+  color: var(--btn-text);
+}
+
+.operator:hover {
+  background-color: var(--btn-operator-hover);
+}
+
+/* 深色模式适配 */
+html.dark .calculator {
+  background-color: var(--dark-card-bg);
+}
+
+html.dark .calculator-display {
+  background-color: var(--dark-input-bg);
+  color: var(--dark-text-color);
+}
+
+html.dark .btn {
+  background-color: var(--dark-btn-bg);
+  color: var(--dark-btn-text);
+}
+html.dark .btn:hover {
+  background-color: var(--dark-btn-hover-bg);
+}
+
+html.dark .operator {
+  background-color: var(--dark-btn-operator);
+}
+
+html.dark .operator:hover {
+  background-color: var(--dark-btn-operator-hover);
+}
