@@ -17,8 +17,8 @@ F-droid : [*download*]("https://f-droid.org")
 
 ### 换更新源
 
-1. [清华源]("https://mirrors.tuna.tsinghua.edu.cn/help/fdroid/") `https://mirrors.tuna.tsinghua.edu.cn/fdroid/repo/?fingerprint=43238D512C1E5EB2D6569F4A3AFBF5523418B82E0A3ED1552770ABB9A9C9CCAB`
-2. [MirrorZ]("https://help.mirrors.cernet.edu.cn/fdroid/") `https://mirrors.cernet.edu.cn/fdroid/repo/?fingerprint=43238D512C1E5EB2D6569F4A3AFBF5523418B82E0A3ED1552770ABB9A9C9CCAB`
+1. [清华源]("https://mirrors.tuna.tsinghua.edu.cn/help/fdroid") `https://mirrors.tuna.tsinghua.edu.cn/fdroid/repo/?fingerprint=43238D512C1E5EB2D6569F4A3AFBF5523418B82E0A3ED1552770ABB9A9C9CCAB`
+2. [MirrorZ]("https://help.mirrors.cernet.edu.cn/fdroid") `https://mirrors.cernet.edu.cn/fdroid/repo/?fingerprint=43238D512C1E5EB2D6569F4A3AFBF5523418B82E0A3ED1552770ABB9A9C9CCAB`
 
 将后面的网址复制，打开F-Droid -> 设置 -> 存储库 -> F-Droid -> + -> 手动输入仓库URL，将其粘贴进去。
 
