@@ -23,6 +23,7 @@ twitter_username: username
 github_username: yjlc-pc
 minimal_mistakes_skin: default
 search: true
+locale: zh-CN
 
 # Build settings
 markdown: kramdown
