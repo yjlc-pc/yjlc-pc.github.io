@@ -58,7 +58,7 @@ const configured = Boolean(giscus.repoId && giscus.categoryId)
             window.addEventListener('message', (event) => {
               if (event.origin !== 'https://giscus.app') return
               if (event.data?.giscus?.discussion) {
-                send(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light')
+                send(document.body.classList.contains('dark') ? 'dark' : 'light')
               }
             })
           })()

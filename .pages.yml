@@ -1,0 +1,80 @@
+media:
+  input: public/media
+  output: /media
+  rename: safe
+  categories: [image]
+
+content:
+  - name: posts
+    label: 文章
+    type: collection
+    path: src/content/posts
+    filename: '{year}-{month}-{day}-{slug}.md'
+    view:
+      fields: [title, date, draft]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: 标题
+        type: string
+        required: true
+      - name: description
+        label: 摘要
+        type: text
+        description: 显示在文章列表和搜索结果里，一到两句话。
+      - name: date
+        label: 日期
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: tags
+        label: 标签
+        type: string
+        list: true
+        description: 回车添加一个标签。
+      - name: draft
+        label: 草稿
+        type: boolean
+        default: false
+        description: 勾选后不会出现在站点和搜索里。
+      - name: body
+        label: 正文
+        type: rich-text
+        options:
+          format: markdown
+          switcher: true
+
+  - name: pages
+    label: 页面
+    type: collection
+    path: src/content/pages
+    view:
+      fields: [title]
+      primary: title
+    fields:
+      - name: title
+        label: 标题
+        type: string
+        required: true
+      - name: description
+        label: 描述
+        type: text
+      - name: body
+        label: 正文
+        type: rich-text
+        options:
+          format: markdown
+          switcher: true
+
+settings:
+  commit:
+    templates:
+      create: 'content(create): {path}'
+      update: 'content(update): {path}'
+      delete: 'content(delete): {path}'
+      rename: 'content(rename): {oldPath} -> {newPath}'

@@ -15,6 +15,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
+  display: block;
   background: var(--md-sys-color-surface);
   color: var(--md-sys-color-on-surface);
   font-family: var(--font-content);
@@ -277,11 +278,17 @@ button {
   margin-left: auto;
 }
 
-main {
-  min-height: 100vh;
+body:has(> main) {
+  display: block;
 }
 
-.page {
+main {
+  min-height: 100vh;
+  padding: 0;
+  overflow: visible;
+}
+
+.content {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -292,7 +299,7 @@ main {
     calc(var(--nav-bar-height) + var(--space-6));
 }
 
-.page--narrow {
+.content--narrow {
   max-width: var(--prose-width);
 }
 
@@ -406,54 +413,16 @@ main {
   color: var(--md-sys-color-on-secondary-container);
 }
 
-/* ---------- 按钮 ---------- */
+/* ---------- 按钮（Beer CSS 提供组件样式，这里只补 M3 触控与字体） ---------- */
 
-.btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
+.button,
+button {
   min-height: 48px;
-  padding: 0 var(--space-6);
-  border-radius: var(--shape-full);
   font-family: var(--font-ui);
-  font-size: var(--md-sys-typescale-label-large-size);
-  line-height: var(--md-sys-typescale-label-large-line-height);
-  font-weight: var(--md-sys-typescale-label-large-weight);
-  letter-spacing: var(--md-sys-typescale-label-large-tracking);
-  transition: background-color var(--duration-short) var(--ease-standard);
 }
 
-.btn--filled {
-  background: var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-primary);
-}
-
-.btn--filled:hover {
-  background: color-mix(in srgb, var(--md-sys-color-on-primary) 8%, var(--md-sys-color-primary));
-}
-
-.btn--tonal {
-  background: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
-}
-
-.btn--tonal:hover {
-  background: color-mix(
-    in srgb,
-    var(--md-sys-color-on-secondary-container) 8%,
-    var(--md-sys-color-secondary-container)
-  );
-}
-
-.btn--text {
-  padding: 0 var(--space-4);
-  color: var(--md-sys-color-primary);
-}
-
-.btn--text:hover {
-  background: color-mix(in srgb, var(--md-sys-color-primary) 8%, transparent);
+button:not(.icon-btn) {
+  font-weight: 500;
 }
 
 .icon-btn {
@@ -477,31 +446,38 @@ main {
   display: none;
 }
 
-[data-theme='dark'] .icon-btn__sun {
+body.dark .icon-btn__sun {
   display: block;
 }
 
-[data-theme='dark'] .icon-btn__moon {
+body.dark .icon-btn__moon {
   display: none;
 }
 
 /* ---------- 卡片 ---------- */
 
-.card {
-  position: relative;
-  display: block;
-  padding: var(--space-6);
-  border-radius: var(--shape-md);
-  background: var(--md-sys-color-surface-container-high);
-  transition: background-color var(--duration-short) var(--ease-standard);
+.post-card {
+  padding: 0;
+  overflow: hidden;
 }
 
-a.card:hover {
-  background: color-mix(
+.post-card:hover {
+  background-color: color-mix(
     in srgb,
-    var(--md-sys-color-on-surface) 6%,
-    var(--md-sys-color-surface-container-high)
+    var(--md-sys-color-on-surface) 4%,
+    var(--md-sys-color-surface-container-low)
   );
+}
+
+.post-card__link {
+  display: block;
+  padding: var(--space-6);
+  color: inherit;
+  text-decoration: none;
+}
+
+.post-card__link:focus-visible {
+  outline-offset: -3px;
 }
 
 .card__date {
@@ -555,44 +531,20 @@ a.card:hover {
   list-style: none;
 }
 
-.chip {
+a.chip {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-1);
-  min-height: 32px;
-  padding: 0 var(--space-3);
-  border-radius: var(--shape-sm);
-  background: var(--md-sys-color-surface-container-high);
-  color: var(--md-sys-color-on-surface-variant);
   font-family: var(--font-ui);
-  font-size: var(--md-sys-typescale-label-medium-size);
-  line-height: var(--md-sys-typescale-label-medium-line-height);
-  font-weight: var(--md-sys-typescale-label-medium-weight);
-  letter-spacing: var(--md-sys-typescale-label-medium-tracking);
 }
 
-.chip::after {
+a.chip::after {
   content: '';
   position: absolute;
   inset: -8px -4px;
 }
 
-a.chip:hover {
-  background: color-mix(
-    in srgb,
-    var(--md-sys-color-on-surface-variant) 8%,
-    var(--md-sys-color-surface-container-high)
-  );
-}
-
-.chip--active {
-  background: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
-}
-
-.chip--static::after {
-  display: none;
+.chip .muted {
+  color: inherit;
+  opacity: 0.65;
 }
 
 /* ---------- 分区标题 ---------- */
@@ -644,21 +596,12 @@ a.chip:hover {
   color: var(--md-sys-color-on-surface-variant);
 }
 
-/* ---------- 图标 ---------- */
+/* ---------- 图标（Beer CSS 的 Material Symbols） ---------- */
 
-.icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
+i {
+  font-size: 24px;
+  line-height: 1;
   flex: none;
-}
-
-.icon svg {
-  width: 100%;
-  height: 100%;
-  fill: currentColor;
 }
 
 /* ---------- 页面头部 / 首页 ---------- */
@@ -698,7 +641,8 @@ a.chip:hover {
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-6);
-  margin-bottom: var(--space-8);
+  max-width: var(--prose-width);
+  margin: 0 auto var(--space-8);
 }
 
 .about-head__avatar {
@@ -758,9 +702,8 @@ a.chip:hover {
   gap: var(--space-1);
 }
 
-.site-footer__links .icon {
-  width: 16px;
-  height: 16px;
+.site-footer__links i {
+  font-size: 16px;
 }
 
 /* ---------- 搜索补充 ---------- */

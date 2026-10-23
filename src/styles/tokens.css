@@ -129,20 +129,25 @@
   --nav-bar-height: 5rem;
   --rail-width: 5rem;
   --rail-expanded-width: 16rem;
-  --prose-width: 45rem;
+  --prose-width: 40rem;
   --content-width: 75rem;
   --margin-compact: var(--space-4);
   --margin-medium: var(--space-6);
+
+  /* Beer CSS 字体变量 */
+  --font: var(--font-ui);
 }
 
 .type-mixed {
   --font-content: var(--font-wenkai);
   --font-ui: var(--font-sans);
   --font-display: var(--font-sans);
+  --font: var(--font-ui);
 }
 
 .type-wenkai {
   --font-content: var(--font-wenkai);
   --font-ui: var(--font-wenkai);
   --font-display: var(--font-wenkai);
+  --font: var(--font-wenkai);
 }

@@ -6,7 +6,7 @@ export const siteConfig = {
   locale: 'zh-CN',
   // mixed：正文霞鹜文楷 + UI 无衬线；wenkai：全站文楷
   fontMode: 'mixed' as 'mixed' | 'wenkai',
-  avatar: 'https://github.com/yjlc-pc.png',
+  avatar: '/media/avatar.svg',
   // 建好仓库、开启 Discussions 并安装 giscus App 后填入
   giscus: {
     repo: 'yjlc-pc/yjlc-pc.github.io',

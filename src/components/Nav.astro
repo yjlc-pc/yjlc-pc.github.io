@@ -1,11 +1,9 @@
 ---
-import Icon from './Icon.astro'
-
 const path = Astro.url.pathname
 const items = [
   { href: '/', label: '首页', icon: 'home' },
   { href: '/posts/', label: '文章', icon: 'article' },
-  { href: '/tags/', label: '标签', icon: 'tag' },
+  { href: '/tags/', label: '标签', icon: 'sell' },
   { href: '/about/', label: '关于', icon: 'info' },
 ] as const
 
@@ -22,7 +20,7 @@ const isActive = (href: string) =>
         aria-current={isActive(item.href) ? 'page' : undefined}
       >
         <span class="nav-bar__icon">
-          <Icon name={item.icon} />
+          <i aria-hidden="true">{item.icon}</i>
         </span>
         {item.label}
       </a>
@@ -38,7 +36,7 @@ const isActive = (href: string) =>
         href={item.href}
         aria-current={isActive(item.href) ? 'page' : undefined}
       >
-        <Icon name={item.icon} />
+        <i aria-hidden="true">{item.icon}</i>
         <span>{item.label}</span>
       </a>
     ))

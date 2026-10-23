@@ -185,14 +185,14 @@
   background-color: transparent;
 }
 
-[data-theme='dark'] .astro-code,
-[data-theme='dark'] .astro-code span {
+body.dark .astro-code,
+body.dark .astro-code span {
   color: var(--shiki-dark);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .astro-code,
-  :root:not([data-theme='light']) .astro-code span {
+  body:not(.light) .astro-code,
+  body:not(.light) .astro-code span {
     color: var(--shiki-dark);
   }
 }
@@ -247,7 +247,7 @@
   color: var(--md-sys-color-on-surface-variant);
 }
 
-.article-toc nav {
+.article-toc__list {
   border-left: 1px solid var(--md-sys-color-outline-variant);
 }
 
@@ -355,38 +355,12 @@
 
 /* ---------- 搜索 ---------- */
 
-.search-box {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  height: 56px;
-  padding: 0 var(--space-4);
-  border: 1px solid var(--md-sys-color-outline);
-  border-radius: var(--shape-full);
-  background: var(--md-sys-color-surface-container-low);
-  transition: border-color var(--duration-short) var(--ease-standard);
+.field {
+  font-family: var(--font-ui);
 }
 
-.search-box:focus-within {
-  border-color: var(--md-sys-color-primary);
-  box-shadow: inset 0 0 0 1px var(--md-sys-color-primary);
-}
-
-.search-box input {
-  flex: 1;
-  min-width: 0;
-  height: 100%;
-  border: 0;
-  outline: 0;
-  background: transparent;
+.field input {
   font-family: var(--font-content);
-  font-size: var(--md-sys-typescale-body-large-size);
-  line-height: var(--md-sys-typescale-body-large-line-height);
-}
-
-.search-box input::placeholder {
-  color: var(--md-sys-color-on-surface-variant);
 }
 
 .search-results {
@@ -521,4 +495,9 @@
   .preview-grid {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
+}
+
+/* 搜索输入宽度 */
+.search-field {
+  max-width: 40rem;
 }

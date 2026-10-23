@@ -1,4 +1,5 @@
 ---
+import 'beercss/dist/cdn/beer.min.css'
 import '../styles/theme.css'
 import '../styles/tokens.css'
 import '../styles/base.css'
@@ -58,32 +59,34 @@ const fontMode = siteConfig.fontMode
       href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-web@1.530.0/lxgwwenkaigbscreen/result.css"
     />
 
-    <script is:inline>
-      ;(() => {
-        try {
-          const forced = new URLSearchParams(location.search).get('theme')
-          if (forced === 'light' || forced === 'dark') {
-            document.documentElement.dataset.theme = forced
-          } else {
-            const saved = localStorage.getItem('theme')
-            const dark = saved
-              ? saved === 'dark'
-              : window.matchMedia('(prefers-color-scheme: dark)').matches
-            document.documentElement.dataset.theme = dark ? 'dark' : 'light'
-          }
-        } catch {
-          document.documentElement.dataset.theme = 'light'
-        }
-      })()
-    </script>
   </head>
 
-  <body>
+  <body class={fontMode}>
+    <script is:inline>
+      ;(() => {
+        let mode
+        try {
+          const forced = new URLSearchParams(location.search).get('theme')
+          mode =
+            forced === 'light' || forced === 'dark'
+              ? forced
+              : localStorage.getItem('theme')
+        } catch {
+          /* 隐私模式 */
+        }
+        if (mode !== 'light' && mode !== 'dark') {
+          mode = window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light'
+        }
+        document.body.classList.add(mode)
+      })()
+    </script>
     <a class="skip-link" href="#main">跳到正文</a>
     <AppBar />
     <Nav />
     <main id="main">
-      <div class="page">
+      <div class="content">
         <slot />
         <Footer />
       </div>

@@ -1,5 +1,4 @@
 ---
-import Icon from './Icon.astro'
 import { siteConfig } from '../site.config'
 ---
 
@@ -11,7 +10,7 @@ import { siteConfig } from '../site.config'
 
   <div class="appbar__actions">
     <a class="icon-btn" href="/search/" aria-label="搜索文章">
-      <Icon name="search" />
+      <i aria-hidden="true">search</i>
     </a>
     <button
       class="icon-btn"
@@ -20,23 +19,24 @@ import { siteConfig } from '../site.config'
       aria-label="切换深浅色主题"
       aria-pressed="false"
     >
-      <span class="icon-btn__moon"><Icon name="dark" /></span>
-      <span class="icon-btn__sun"><Icon name="light" /></span>
+      <span class="icon-btn__moon"><i aria-hidden="true">dark_mode</i></span>
+      <span class="icon-btn__sun"><i aria-hidden="true">light_mode</i></span>
     </button>
   </div>
 </header>
 
 <script>
-  const root = document.documentElement
+  const body = document.body
   const toggle = document.getElementById('theme-toggle')
   if (toggle) {
     const sync = () => {
-      toggle.setAttribute('aria-pressed', String(root.dataset.theme === 'dark'))
+      toggle.setAttribute('aria-pressed', String(body.classList.contains('dark')))
     }
     sync()
     toggle.addEventListener('click', () => {
-      const next = root.dataset.theme === 'dark' ? 'light' : 'dark'
-      root.dataset.theme = next
+      const next = body.classList.contains('dark') ? 'light' : 'dark'
+      body.classList.remove('light', 'dark')
+      body.classList.add(next)
       try {
         localStorage.setItem('theme', next)
       } catch {

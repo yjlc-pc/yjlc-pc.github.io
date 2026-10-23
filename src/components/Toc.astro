@@ -14,10 +14,10 @@ const items = Astro.props.headings.filter((h) => h.depth === 2 || h.depth === 3)
 
 {
   items.length > 0 && (
-    <aside class="article-toc" aria-label="本页目录">
+    <div class="article-toc" role="complementary" aria-label="本页目录">
       <div class="article-toc__inner">
         <p class="label-large article-toc__title">本页目录</p>
-        <nav>
+        <div class="article-toc__list">
           <ul>
             {items.map((h) => (
               <li class:list={[h.depth === 3 && 'toc-h3']}>
@@ -25,9 +25,9 @@ const items = Astro.props.headings.filter((h) => h.depth === 2 || h.depth === 3)
               </li>
             ))}
           </ul>
-        </nav>
+        </div>
       </div>
-    </aside>
+    </div>
   )
 }
 

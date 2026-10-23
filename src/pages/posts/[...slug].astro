@@ -25,7 +25,7 @@ const { title, description, date, updated, tags } = post.data
 
 <BaseLayout title={title} description={description} ogType="article">
   <div class="article-layout">
-    <article>
+    <div class="post-article">
       <header class="post-header">
         <h1 class="headline-large post-header__title">{title}</h1>
         <div class="post-header__meta body-small">
@@ -77,7 +77,7 @@ const { title, description, date, updated, tags } = post.data
       </nav>
 
       <Comments />
-    </article>
+    </div>
 
     <Toc headings={headings} />
   </div>

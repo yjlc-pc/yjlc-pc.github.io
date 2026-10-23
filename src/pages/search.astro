@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import Icon from '../components/Icon.astro'
 ---
 
 <BaseLayout title="搜索" description="在全站文章里搜索关键词" noindex>
@@ -9,9 +8,8 @@ import Icon from '../components/Icon.astro'
     <p class="body-large muted">在标题和正文里找关键词。索引在构建时生成，不需要服务器。</p>
   </header>
 
-  <div class="search-box">
-    <Icon name="search" />
-    <label class="visually-hidden" for="search-input">搜索文章</label>
+  <div class="field label prefix border search-field">
+    <i aria-hidden="true">search</i>
     <input
       id="search-input"
       type="search"
@@ -19,6 +17,7 @@ import Icon from '../components/Icon.astro'
       autocomplete="off"
       spellcheck="false"
     />
+    <label for="search-input">输入关键词</label>
   </div>
 
   <p id="search-status" class="body-small muted search-status" role="status" aria-live="polite"></p>
