@@ -10,9 +10,9 @@ export const siteConfig = {
   // 建好仓库、开启 Discussions 并安装 giscus App 后填入
   giscus: {
     repo: 'yjlc-pc/yjlc-pc.github.io',
-    repoId: '',
+    repoId: 'R_kgDOVUpWWw',
     category: 'Announcements',
-    categoryId: '',
+    categoryId: 'DIC_kwDOVUpWW84DJaXz',
     mapping: 'pathname',
     strict: '0',
     reactionsEnabled: '1',
