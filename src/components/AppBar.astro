@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro'
 import { siteConfig } from '../site.config'
 ---
 
@@ -10,7 +11,7 @@ import { siteConfig } from '../site.config'
 
   <div class="appbar__actions">
     <a class="icon-btn" href="/search/" aria-label="搜索文章">
-      <i aria-hidden="true">search</i>
+      <Icon name="search" />
     </a>
     <button
       class="icon-btn"
@@ -19,8 +20,8 @@ import { siteConfig } from '../site.config'
       aria-label="切换深浅色主题"
       aria-pressed="false"
     >
-      <span class="icon-btn__moon"><i aria-hidden="true">dark_mode</i></span>
-      <span class="icon-btn__sun"><i aria-hidden="true">light_mode</i></span>
+      <span class="icon-btn__moon"><Icon name="dark" /></span>
+      <span class="icon-btn__sun"><Icon name="light" /></span>
     </button>
   </div>
 </header>

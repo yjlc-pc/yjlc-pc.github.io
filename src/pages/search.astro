@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import Icon from '../components/Icon.astro'
 ---
 
 <BaseLayout title="搜索" description="在全站文章里搜索关键词" noindex>
@@ -9,7 +10,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
   </header>
 
   <div class="field label prefix border search-field">
-    <i aria-hidden="true">search</i>
+    <Icon name="search" />
     <input
       id="search-input"
       type="search"
