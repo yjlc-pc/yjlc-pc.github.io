@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Icon from '../components/Icon.astro'
+---
+
+<BaseLayout title="搜索" description="在全站文章里搜索关键词" noindex>
+  <header class="page-head">
+    <h1 class="headline-large">搜索</h1>
+    <p class="body-large muted">在标题和正文里找关键词。索引在构建时生成，不需要服务器。</p>
+  </header>
+
+  <div class="search-box">
+    <Icon name="search" />
+    <label class="visually-hidden" for="search-input">搜索文章</label>
+    <input
+      id="search-input"
+      type="search"
+      placeholder="比如：Astro、M3、文楷"
+      autocomplete="off"
+      spellcheck="false"
+    />
+  </div>
+
+  <p id="search-status" class="body-small muted search-status" role="status" aria-live="polite"></p>
+  <ul id="search-results" class="search-results"></ul>
+</BaseLayout>
+
+<script>
+  const input = document.getElementById('search-input') as HTMLInputElement | null
+  const status = document.getElementById('search-status')
+  const list = document.getElementById('search-results')
+
+  if (input && status && list) {
+    let pagefind: any = null
+    let requestId = 0
+
+    const loadPagefind = async () => {
+      if (pagefind) return pagefind
+      try {
+        pagefind = await import(/* @vite-ignore */ '/pagefind/pagefind.js')
+        await pagefind.options({ excerptLength: 40 })
+        return pagefind
+      } catch {
+        return null
+      }
+    }
+
+    const clear = () => {
+      list.replaceChildren()
+      status.textContent = ''
+    }
+
+    const render = (items: any[]) => {
+      list.replaceChildren()
+      for (const item of items) {
+        const li = document.createElement('li')
+        const link = document.createElement('a')
+        link.className = 'search-result'
+        link.href = item.url
+
+        const title = document.createElement('p')
+        title.className = 'title-medium search-result__title'
+        title.textContent = item.meta?.title ?? item.url
+
+        const excerpt = document.createElement('p')
+        excerpt.className = 'body-medium search-result__excerpt'
+        excerpt.innerHTML = item.excerpt ?? ''
+
+        link.append(title, excerpt)
+        li.append(link)
+        list.append(li)
+      }
+    }
+
+    const run = async () => {
+      const query = input.value.trim()
+      if (!query) {
+        clear()
+        return
+      }
+
+      const id = ++requestId
+      const pf = await loadPagefind()
+      if (!pf) {
+        status.textContent = '搜索索引还没生成：运行 pnpm build 后再预览。'
+        return
+      }
+
+      const search = await pf.search(query)
+      if (id !== requestId) return
+
+      const items = await Promise.all(
+        search.results.slice(0, 20).map((result: any) => result.data()),
+      )
+      if (id !== requestId) return
+
+      status.textContent = items.length
+        ? `找到 ${items.length} 条结果`
+        : `没有找到和「${query}」相关的文章`
+      render(items)
+    }
+
+    let timer: ReturnType<typeof setTimeout> | undefined
+    input.addEventListener('input', () => {
+      clearTimeout(timer)
+      timer = setTimeout(run, 200)
+    })
+    input.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        clearTimeout(timer)
+        run()
+      }
+    })
+
+    const params = new URLSearchParams(location.search)
+    const initial = params.get('q')
+    if (initial) {
+      input.value = initial
+      run()
+    }
+    input.focus()
+  }
+</script>

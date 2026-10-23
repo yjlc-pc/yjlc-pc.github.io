@@ -1,0 +1,26 @@
+---
+import type { Post } from '../lib/posts'
+import { formatDate, isoDate, postUrl } from '../lib/posts'
+
+interface Props {
+  post: Post
+}
+
+const { post } = Astro.props
+const { title, description, date, tags } = post.data
+---
+
+<a class="card" href={postUrl(post)}>
+  <time class="card__date body-small" datetime={isoDate(date)}>{formatDate(date)}</time>
+  <h3 class="title-large card__title">{title}</h3>
+  {description && <p class="body-medium card__summary">{description}</p>}
+  {
+    tags.length > 0 && (
+      <div class="card__tags">
+        {tags.slice(0, 3).map((tag) => (
+          <span class="chip chip--static">{tag}</span>
+        ))}
+      </div>
+    )
+  }
+</a>

@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+
+const path = Astro.url.pathname
+---
+
+<BaseLayout title="页面不存在" noindex>
+  <div class="not-found">
+    <p class="label-large muted">404</p>
+    <h1 class="display-small">这页走丢了</h1>
+    <p class="body-large muted">
+      你访问的地址 <code class="mono">{path}</code> 没有对应的页面，可能是文章改过地址。
+    </p>
+    <div class="home-hero__actions">
+      <a class="btn btn--filled" href="/">回到首页</a>
+      <a class="btn btn--text" href="/search/">搜索文章</a>
+    </div>
+  </div>
+</BaseLayout>

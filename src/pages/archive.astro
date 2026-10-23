@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { formatDate, getPosts, isoDate, postUrl, type Post } from '../lib/posts'
+
+const posts = await getPosts()
+
+const byYear = new Map<number, Post[]>()
+for (const post of posts) {
+  const year = post.data.date.getFullYear()
+  const bucket = byYear.get(year) ?? []
+  bucket.push(post)
+  byYear.set(year, bucket)
+}
+const years = [...byYear.keys()].sort((a, b) => b - a)
+---
+
+<BaseLayout title="归档">
+  <header class="page-head">
+    <h1 class="headline-large">归档</h1>
+    <p class="body-large muted">共 {posts.length} 篇文章。</p>
+  </header>
+
+  {
+    years.map((year) => (
+      <section aria-labelledby={`year-${year}`}>
+        <h2 id={`year-${year}`} class="title-large archive-year">
+          {year} 年
+        </h2>
+        <ul class="archive-list">
+          {byYear.get(year)!.map((post) => (
+            <li>
+              <a href={postUrl(post)}>
+                <time datetime={isoDate(post.data.date)}>
+                  {formatDate(post.data.date)}
+                </time>
+                <span class="title-medium">{post.data.title}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+
+  {posts.length === 0 && <div class="empty-state body-large">还没有文章。</div>}
+</BaseLayout>

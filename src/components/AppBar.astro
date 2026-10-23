@@ -1,0 +1,49 @@
+---
+import Icon from './Icon.astro'
+import { siteConfig } from '../site.config'
+---
+
+<header class="appbar">
+  <a class="appbar__brand" href="/" aria-label={`${siteConfig.title} 首页`}>
+    <span class="appbar__brand-mark" aria-hidden="true">Y</span>
+    <span class="appbar__title">{siteConfig.title}</span>
+  </a>
+
+  <div class="appbar__actions">
+    <a class="icon-btn" href="/search/" aria-label="搜索文章">
+      <Icon name="search" />
+    </a>
+    <button
+      class="icon-btn"
+      id="theme-toggle"
+      type="button"
+      aria-label="切换深浅色主题"
+      aria-pressed="false"
+    >
+      <span class="icon-btn__moon"><Icon name="dark" /></span>
+      <span class="icon-btn__sun"><Icon name="light" /></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  const root = document.documentElement
+  const toggle = document.getElementById('theme-toggle')
+  if (toggle) {
+    const sync = () => {
+      toggle.setAttribute('aria-pressed', String(root.dataset.theme === 'dark'))
+    }
+    sync()
+    toggle.addEventListener('click', () => {
+      const next = root.dataset.theme === 'dark' ? 'light' : 'dark'
+      root.dataset.theme = next
+      try {
+        localStorage.setItem('theme', next)
+      } catch {
+        /* 隐私模式下忽略 */
+      }
+      sync()
+      document.dispatchEvent(new CustomEvent('themechange', { detail: next }))
+    })
+  }
+</script>

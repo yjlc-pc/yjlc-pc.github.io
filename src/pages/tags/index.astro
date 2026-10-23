@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { collectTags, getPosts, tagUrl } from '../../lib/posts'
+
+const posts = await getPosts()
+const tags = collectTags(posts)
+---
+
+<BaseLayout title="标签">
+  <header class="page-head">
+    <h1 class="headline-large">标签</h1>
+    <p class="body-large muted">共 {tags.length} 个标签。</p>
+  </header>
+
+  {
+    tags.length > 0 ? (
+      <ul class="chip-row">
+        {tags.map((tag) => (
+          <li>
+            <a class="chip" href={tagUrl(tag.name)}>
+              {tag.name}
+              <span class="muted">{tag.count}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <div class="empty-state body-large">还没有标签。</div>
+    )
+  }
+</BaseLayout>

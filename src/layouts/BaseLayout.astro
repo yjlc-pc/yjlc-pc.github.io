@@ -1,0 +1,92 @@
+---
+import '../styles/theme.css'
+import '../styles/tokens.css'
+import '../styles/base.css'
+import '../styles/prose.css'
+import AppBar from '../components/AppBar.astro'
+import Footer from '../components/Footer.astro'
+import Nav from '../components/Nav.astro'
+import { siteConfig } from '../site.config'
+
+interface Props {
+  title?: string
+  description?: string
+  ogType?: 'website' | 'article'
+  noindex?: boolean
+}
+
+const {
+  title,
+  description = siteConfig.description,
+  ogType = 'website',
+  noindex = false,
+} = Astro.props
+
+const pageTitle = title ? `${title} · ${siteConfig.title}` : siteConfig.title
+const canonical = new URL(Astro.url.pathname, Astro.site ?? siteConfig.url)
+const fontMode = siteConfig.fontMode
+---
+
+<!doctype html>
+<html lang={siteConfig.locale} class={fontMode}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${siteConfig.title} RSS`}
+      href="/rss.xml"
+    />
+
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={siteConfig.title} />
+    <meta property="og:locale" content="zh_CN" />
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-web@1.530.0/lxgwwenkaigbscreen/result.css"
+    />
+
+    <script is:inline>
+      ;(() => {
+        try {
+          const forced = new URLSearchParams(location.search).get('theme')
+          if (forced === 'light' || forced === 'dark') {
+            document.documentElement.dataset.theme = forced
+          } else {
+            const saved = localStorage.getItem('theme')
+            const dark = saved
+              ? saved === 'dark'
+              : window.matchMedia('(prefers-color-scheme: dark)').matches
+            document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+          }
+        } catch {
+          document.documentElement.dataset.theme = 'light'
+        }
+      })()
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">跳到正文</a>
+    <AppBar />
+    <Nav />
+    <main id="main">
+      <div class="page">
+        <slot />
+        <Footer />
+      </div>
+    </main>
+  </body>
+</html>

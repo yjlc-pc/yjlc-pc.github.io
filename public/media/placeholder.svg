@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="480" viewBox="0 0 960 480" role="img" aria-label="构建流程示意">
+  <rect width="960" height="480" rx="24" fill="#f3f1f7"/>
+  <rect x="64" y="56" width="832" height="368" rx="20" fill="#dae2ff"/>
+  <g font-family="system-ui, sans-serif" text-anchor="middle">
+    <g>
+      <rect x="104" y="176" width="200" height="128" rx="16" fill="#ffffff"/>
+      <text x="204" y="232" font-size="24" fill="#001947">Markdown</text>
+      <text x="204" y="264" font-size="16" fill="#585e71">src/content</text>
+    </g>
+    <g>
+      <rect x="380" y="176" width="200" height="128" rx="16" fill="#ffffff"/>
+      <text x="480" y="232" font-size="24" fill="#001947">Astro build</text>
+      <text x="480" y="264" font-size="16" fill="#585e71">静态 HTML</text>
+    </g>
+    <g>
+      <rect x="656" y="176" width="200" height="128" rx="16" fill="#ffffff"/>
+      <text x="756" y="232" font-size="24" fill="#001947">Pages</text>
+      <text x="756" y="264" font-size="16" fill="#585e71">github.io</text>
+    </g>
+    <path d="M312 240h56" stroke="#395ba9" stroke-width="6" stroke-linecap="round"/>
+    <path d="M348 226l18 14-18 14" fill="none" stroke="#395ba9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M588 240h56" stroke="#395ba9" stroke-width="6" stroke-linecap="round"/>
+    <path d="M624 226l18 14-18 14" fill="none" stroke="#395ba9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

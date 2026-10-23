@@ -1,0 +1,46 @@
+---
+import Icon from './Icon.astro'
+
+const path = Astro.url.pathname
+const items = [
+  { href: '/', label: '首页', icon: 'home' },
+  { href: '/posts/', label: '文章', icon: 'article' },
+  { href: '/tags/', label: '标签', icon: 'tag' },
+  { href: '/about/', label: '关于', icon: 'info' },
+] as const
+
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href)
+---
+
+<nav class="nav-bar" aria-label="主导航">
+  {
+    items.map((item) => (
+      <a
+        class="nav-bar__item"
+        href={item.href}
+        aria-current={isActive(item.href) ? 'page' : undefined}
+      >
+        <span class="nav-bar__icon">
+          <Icon name={item.icon} />
+        </span>
+        {item.label}
+      </a>
+    ))
+  }
+</nav>
+
+<nav class="nav-rail" aria-label="侧边导航">
+  {
+    items.map((item) => (
+      <a
+        class="nav-rail__item"
+        href={item.href}
+        aria-current={isActive(item.href) ? 'page' : undefined}
+      >
+        <Icon name={item.icon} />
+        <span>{item.label}</span>
+      </a>
+    ))
+  }
+</nav>

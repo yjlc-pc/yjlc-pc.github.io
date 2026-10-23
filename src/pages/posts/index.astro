@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import PostCard from '../../components/PostCard.astro'
+import { getPosts } from '../../lib/posts'
+
+const posts = await getPosts()
+---
+
+<BaseLayout title="文章">
+  <header class="page-head">
+    <h1 class="headline-large">文章</h1>
+    <p class="body-large muted">共 {posts.length} 篇，按时间倒序。</p>
+  </header>
+
+  <div class="post-grid">
+    {posts.map((post) => <PostCard post={post} />)}
+  </div>
+
+  {posts.length === 0 && <div class="empty-state body-large">还没有文章。</div>}
+</BaseLayout>

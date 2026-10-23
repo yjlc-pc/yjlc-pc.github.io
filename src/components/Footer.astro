@@ -1,0 +1,16 @@
+---
+import Icon from './Icon.astro'
+import { siteConfig } from '../site.config'
+
+const year = new Date().getFullYear()
+---
+
+<footer class="site-footer body-small">
+  <span>© {year} {siteConfig.author} · 用 Markdown 写成</span>
+  <span class="site-footer__links">
+    <a href="/rss.xml"><Icon name="rss" /> RSS</a>
+    <a href="https://github.com/yjlc-pc" target="_blank" rel="noopener noreferrer">
+      <Icon name="external" /> GitHub
+    </a>
+  </span>
+</footer>

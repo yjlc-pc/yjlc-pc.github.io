@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<BaseLayout title="字体对比" description="霞鹜文楷 GB Screen 的两种排版方案对比" noindex>
+  <header class="page-head">
+    <p class="label-large muted">预览</p>
+    <h1 class="headline-large">霞鹜文楷 GB Screen：两种用法</h1>
+    <p class="body-large muted">同一段内容，分别用两套排版渲染，用来比较标题和 UI 文字的字形差异。</p>
+  </header>
+
+  <div class="preview-grid">
+    <section class="preview-pane type-mixed" aria-labelledby="preview-a">
+      <span class="preview-label label-medium">方案 A · 正文文楷 + UI 无衬线</span>
+      <h2 id="preview-a" class="headline-small">把折腾过程写下来</h2>
+      <p>
+        周四晚上，我把旧博客的最后一块拼图补上了：搜索、评论、RSS，以及一套能长期维护的排版。
+        中文正文用霞鹜文楷，Latin 和数字自然混排，读起来比黑体松一点。
+      </p>
+      <p>
+        写长文时，正文的呼吸感比「看起来高级」更重要。行距、列宽、段间距这三件事调对了，
+        剩下的装饰都是次要的。链接像这样：<a href="/about/">关于页</a>。
+      </p>
+      <blockquote>字体不是装饰，它是阅读节奏的一部分。</blockquote>
+      <p>行内代码 <code>pnpm build</code> 使用等宽字体，和正文区分开。</p>
+      <p class="label-medium muted">标签 · Material Design 3 · Astro · 2026</p>
+    </section>
+
+    <section class="preview-pane type-wenkai" aria-labelledby="preview-b">
+      <span class="preview-label label-medium">方案 B · 全站文楷</span>
+      <h2 id="preview-b" class="headline-small">把折腾过程写下来</h2>
+      <p>
+        周四晚上，我把旧博客的最后一块拼图补上了：搜索、评论、RSS，以及一套能长期维护的排版。
+        中文正文用霞鹜文楷，Latin 和数字自然混排，读起来比黑体松一点。
+      </p>
+      <p>
+        写长文时，正文的呼吸感比「看起来高级」更重要。行距、列宽、段间距这三件事调对了，
+        剩下的装饰都是次要的。链接像这样：<a href="/about/">关于页</a>。
+      </p>
+      <blockquote>字体不是装饰，它是阅读节奏的一部分。</blockquote>
+      <p>行内代码 <code>pnpm build</code> 使用等宽字体，和正文区分开。</p>
+      <p class="label-medium muted">标签 · Material Design 3 · Astro · 2026</p>
+    </section>
+  </div>
+</BaseLayout>
