@@ -26,6 +26,8 @@ const {
 const pageTitle = title ? `${title} · ${siteConfig.title}` : siteConfig.title
 const canonical = new URL(Astro.url.pathname, Astro.site ?? siteConfig.url)
 const fontMode = siteConfig.fontMode
+const fontCss =
+  'https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-web@1.530.0/lxgwwenkaigbscreen/result.css'
 ---
 
 <!doctype html>
@@ -54,10 +56,16 @@ const fontMode = siteConfig.fontMode
     <meta property="og:locale" content="zh_CN" />
 
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preload" as="style" href={fontCss} />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-web@1.530.0/lxgwwenkaigbscreen/result.css"
+      href={fontCss}
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link rel="stylesheet" href={fontCss} />
+    </noscript>
 
   </head>
 
