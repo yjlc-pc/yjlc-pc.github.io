@@ -9,6 +9,8 @@ export const siteConfig = {
   avatar: '/media/avatar.svg',
   // 建好仓库、开启 Discussions 并安装 giscus App 后填入
   giscus: {
+    // 恢复 GitHub 账号并安装 giscus App 后改成 true
+    enabled: false,
     repo: 'yjlc-pc/yjlc-pc.github.io',
     repoId: 'R_kgDOVUpWWw',
     category: 'Announcements',

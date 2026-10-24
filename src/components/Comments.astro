@@ -2,73 +2,66 @@
 import { siteConfig } from '../site.config'
 
 const giscus = siteConfig.giscus
-const configured = Boolean(giscus.repoId && giscus.categoryId)
+const enabled = Boolean(giscus.enabled && giscus.repoId && giscus.categoryId)
 ---
 
-<section class="comments" id="comments">
-  <h2 class="title-large">评论</h2>
-  {
-    configured ? (
-      <>
-        <div
-          class="giscus"
-          data-repo={giscus.repo}
-          data-repo-id={giscus.repoId}
-          data-category={giscus.category}
-          data-category-id={giscus.categoryId}
-          data-mapping={giscus.mapping}
-          data-strict={giscus.strict}
-          data-reactions-enabled={giscus.reactionsEnabled}
-          data-emit-metadata="0"
-          data-input-position={giscus.inputPosition}
-          data-lang={giscus.lang}
-          data-loading="lazy"
-        />
-        <script
-          is:inline
-          src="https://giscus.app/client.js"
-          data-repo={giscus.repo}
-          data-repo-id={giscus.repoId}
-          data-category={giscus.category}
-          data-category-id={giscus.categoryId}
-          data-mapping={giscus.mapping}
-          data-strict={giscus.strict}
-          data-reactions-enabled={giscus.reactionsEnabled}
-          data-emit-metadata="0"
-          data-input-position={giscus.inputPosition}
-          data-lang={giscus.lang}
-          data-loading="lazy"
-          data-theme="preferred_color_scheme"
-          crossorigin="anonymous"
-          async
-        />
-        <script is:inline>
-          ;(() => {
-            const send = (theme) => {
-              const frame = document.querySelector('iframe.giscus-frame')
-              if (!frame) return
-              frame.contentWindow?.postMessage(
-                { giscus: { setConfig: { theme } } },
-                'https://giscus.app',
-              )
+{
+  enabled && (
+    <section class="comments" id="comments">
+      <h2 class="title-large">评论</h2>
+      <div
+        class="giscus"
+        data-repo={giscus.repo}
+        data-repo-id={giscus.repoId}
+        data-category={giscus.category}
+        data-category-id={giscus.categoryId}
+        data-mapping={giscus.mapping}
+        data-strict={giscus.strict}
+        data-reactions-enabled={giscus.reactionsEnabled}
+        data-emit-metadata="0"
+        data-input-position={giscus.inputPosition}
+        data-lang={giscus.lang}
+        data-loading="lazy"
+      />
+      <script
+        is:inline
+        src="https://giscus.app/client.js"
+        data-repo={giscus.repo}
+        data-repo-id={giscus.repoId}
+        data-category={giscus.category}
+        data-category-id={giscus.categoryId}
+        data-mapping={giscus.mapping}
+        data-strict={giscus.strict}
+        data-reactions-enabled={giscus.reactionsEnabled}
+        data-emit-metadata="0"
+        data-input-position={giscus.inputPosition}
+        data-lang={giscus.lang}
+        data-loading="lazy"
+        data-theme="preferred_color_scheme"
+        crossorigin="anonymous"
+        async
+      />
+      <script is:inline>
+        ;(() => {
+          const send = (theme) => {
+            const frame = document.querySelector('iframe.giscus-frame')
+            if (!frame) return
+            frame.contentWindow?.postMessage(
+              { giscus: { setConfig: { theme } } },
+              'https://giscus.app',
+            )
+          }
+          document.addEventListener('themechange', (event) => {
+            send(event.detail === 'dark' ? 'dark' : 'light')
+          })
+          window.addEventListener('message', (event) => {
+            if (event.origin !== 'https://giscus.app') return
+            if (event.data?.giscus?.discussion) {
+              send(document.body.classList.contains('dark') ? 'dark' : 'light')
             }
-            document.addEventListener('themechange', (event) => {
-              send(event.detail === 'dark' ? 'dark' : 'light')
-            })
-            window.addEventListener('message', (event) => {
-              if (event.origin !== 'https://giscus.app') return
-              if (event.data?.giscus?.discussion) {
-                send(document.body.classList.contains('dark') ? 'dark' : 'light')
-              }
-            })
-          })()
-        </script>
-      </>
-    ) : (
-      <p class="comments__note body-medium">
-        评论还没有接上：需要先在 GitHub 仓库开启 Discussions，再把 giscus 的
-        repoId 和 categoryId 填进 <code>src/site.config.ts</code>。
-      </p>
-    )
-  }
-</section>
+          })
+        })()
+      </script>
+    </section>
+  )
+}
