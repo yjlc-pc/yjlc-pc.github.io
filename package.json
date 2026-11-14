@@ -14,7 +14,7 @@
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
     "@fontsource/jetbrains-mono": "^5.3.0",
-    "astro": "^7.4.2",
+    "astro": "^7.4.7",
     "beercss": "^5.0.3",
     "material-dynamic-colors": "^1.1.4",
     "pagefind": "^1.5.2"
